@@ -1,0 +1,49 @@
+{
+  "name": "l-react-ui",
+  "version": "1.0.0",
+  "description": "react components library",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "private": true,
+  "scripts": {
+    "start": "rimraf dist && cross-env NODE_ENV=development webpack --config ./build/webpack.config.js -w",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-liuyang/l-react-ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/web-liuyang/l-react-ui/issues"
+  },
+  "homepage": "https://github.com/web-liuyang/l-react-ui#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
+    "@babel/preset-react": "^7.12.13",
+    "@types/classnames": "^2.2.11",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "autoprefixer": "^10.2.4",
+    "css-loader": "^5.1.0",
+    "less": "^4.1.1",
+    "less-loader": "^8.0.0",
+    "mini-css-extract-plugin": "^1.3.9",
+    "postcss": "^8.2.6",
+    "postcss-loader": "^5.0.0",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.2",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "cross-env": "^7.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
