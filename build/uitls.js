@@ -10,11 +10,38 @@ const COMPOENNTSDIRPATH = rootResolve('src/components');
 
 const componentDirs = fs.readdirSync(COMPOENNTSDIRPATH);
 
-const componentEntrys = {};
-componentDirs.forEach((dirname, index) => {
-  componentEntrys[dirname.toLowerCase()] = path.join(COMPOENNTSDIRPATH, dirname, 'index.tsx');
+const CEntrys = [];
+
+const CEntryObj = {};
+
+componentDirs.forEach((filename) => {
+  const item = {
+    foldername: filename,
+    dir: COMPOENNTSDIRPATH,
+    format: path.join(COMPOENNTSDIRPATH, filename, 'index.tsx'),
+  };
+  CEntrys.push(item);
+
+  CEntryObj[filename.toLowerCase()] = path.join(COMPOENNTSDIRPATH, filename, 'index.tsx');
 });
 
+// console.log(CEntrys);
+// console.log(CEntryObj)
 module.exports = {
-  componentEntrys,
+  CEntrys,
+  CEntryObj,
 };
+
+const rootDir = path.resolve(__dirname, '../');
+const componentDir = 'src/components';
+const cModuleNames = fs.readdirSync(path.resolve(componentDir));
+
+const cModuleMap = cModuleNames.reduce((prev, name) => {
+  prev[name] = path.join(rootDir, `${componentDir}/${name}/index.js`);
+
+  return prev;
+}, {});
+
+// console.log('CEntrys',CEntrys)
+// console.log('CEntryObj',CEntryObj)
+// console.log('cModuleMap',cModuleMap);

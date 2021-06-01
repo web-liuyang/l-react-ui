@@ -1,64 +1,112 @@
-import React, { ChangeEvent, FC, memo, useState } from 'react';
+import React, { FC, useState } from 'react';
+import classnames from 'classnames';
+import { Input as AInput } from 'antd';
+import { GetFuncPropsType } from '../../constants/interface';
 
-import '../../style/index.less';
 import './index.less';
+import { GroupProps } from 'antd/lib/input/Group';
 
-interface IProps {
-  width?: number;
-  height?: number;
-  rounded?: number;
-  type?: string;
-  disabled?: boolean;
+type IInputProps = ConstructorParameters<typeof AInput>[0];
 
-  value?: string;
-  name?: string;
-  placeholder?: string;
-  maxLength?: number;
-
-  onChange?: (value: string) => void;
-  onClickIcon?: () => void;
-  onClickTitle?: () => void;
-  onClickInput?: () => void;
+interface IProps extends IInputProps {
+  /** 错误消息 */
+  errorMessage?: string;
+  /** 正则表达式 */
+  valid?: RegExp | RegExp[] | string;
+  /** 是否合法 */
+  isValid?: boolean;
+  /** 是否合法监听 */
+  onValid?: (isValid: boolean) => void;
 }
 
-const Input: FC<IProps> = (props) => {
-  const {
-    type = 'text',
-    maxLength,
-    rounded = 4,
-    disabled,
-    value = '',
-    name,
-    placeholder,
+// static Group: typeof Group;
 
+interface Static {
+  Group: React.FC<GroupProps>;
+}
+
+const Input: FC<IProps> & Static = props => {
+  const {
+    value,
+    valid,
+    isValid,
+    errorMessage,
+    className,
+    onValid,
     onChange,
+    ...inputProps
   } = props;
 
-  // const [inputValue, setInputValue] = useState<string>(value);
+  /** 是否合法 自动监听 */
+  const [isValidAuto, setIsValidAuto] = useState<boolean>(true);
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(e.target.value);
+  /** 监听Input事件 */
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    onChange && onChange(e);
+
+    // 是否合法
+    if (valid) {
+      let bool = true;
+
+      /** 是否是数组 */
+      if (Array.isArray(valid)) {
+        for (const item of valid) {
+          if (!item.test(value)) {
+            bool = false;
+            break;
+          }
+        }
+      } else if (typeof valid === 'string') {
+        bool = valid === value;
+      } else {
+        bool = valid.test(value);
+      }
+
+      isVaildFunc(bool);
+    }
+  };
+
+  /** 判断是否合法函数 */
+  const isVaildFunc = (bool: boolean) => {
+    console.log(bool);
+    if (bool) {
+      // 合法操作
+
+      // 触发手动监听
+      onValid && onValid(true);
+
+      // 自动监听
+      isValid === undefined && setIsValidAuto(true);
+    } else {
+      // 不合法操作
+
+      // 触发手动监听
+      onValid && onValid(false);
+
+      // 自动监听
+      isValid === undefined && setIsValidAuto(false);
+    }
   };
 
   return (
-    <div
-      className="position-relative flex-center align-items-stretch px-8 py-4 bg-FFFFFF border border-E5E5E5  l-input"
-      style={{ borderRadius: rounded }}
-    >
-      <div className="input-box">
-        <input
-          className="input"
-          type={type}
-          name={name}
-          value={value}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          disabled={disabled}
-          onChange={handleChangeInput}
-        />
-      </div>
+    <div className={classnames(['position-relative l-input', className])}>
+      <AInput className="input" value={value} onChange={handleChangeInput} {...inputProps} />
+      <p
+        className={classnames([
+          'position-absolute l-10 color-error f12',
+          { 'd-none': isValid === undefined ? isValidAuto : isValid },
+          'error',
+        ])}
+      >
+        {errorMessage}
+      </p>
     </div>
   );
 };
 
-export default memo(Input);
+Input.Group = AInput.Group;
+
+// export default React.memo(Input);
+export default Input;

@@ -1,100 +1,59 @@
-import React,{ FC, FunctionComponent, ReactNode } from 'react';
-import classname from 'classnames';
-import Shade from '../Shade';
+import React, { FC, useState } from 'react';
+import classnames from 'classnames';
+import { Modal as AModal } from 'antd';
+import { GetFuncPropsType } from '../../constants/interface';
+import Button from '../Button';
 
-import '../../style/index.less';
+// import '../Button/index.less';
 import './index.less';
 
-enum Default {
-  CANCEL = '取消',
-  CONFIRM = '确定',
+type IModalProps = GetFuncPropsType<typeof AModal>;
+
+enum DEFAULT {
+  /** 取消 */
+  CANCELTEXT = '取消',
+  /** 确定 */
+  OKTEXT = '确定',
 }
 
-interface IProps {
-  show?: boolean;
-  title?: string;
-  content?: string;
-  cancel?: string;
-  showCancel?: boolean;
-  confirm?: boolean;
-  showConfirm?: boolean;
-  rounded?: boolean;
-  onClickCancel?: () => void;
-  onClickConfirm?: () => void;
-}
-
-const Modal: FC<IProps> = (props) => {
+const Modal: FC<IModalProps> = props => {
   const {
-    show,
-    title,
-    content,
-    cancel = Default.CANCEL,
-    confirm = Default.CONFIRM,
-    showCancel = true,
-    showConfirm = true,
-    rounded,
-    children,
-    onClickCancel,
-    onClickConfirm,
+    footer,
+    className,
+    confirmLoading,
+    okText = DEFAULT.OKTEXT,
+    cancelText = DEFAULT.CANCELTEXT,
+    onOk,
+    onCancel,
+    ...modalProps
   } = props;
 
-  console.log(children);
-  // 点击遮罩层
-  const handleClickShade = () => {};
-
-  // 取消
-  const handleClickCancel = () => {
-    onClickCancel && onClickCancel();
-  };
-
-  // 确定
-  const handleClickConfirm = () => {
-    onClickConfirm && onClickConfirm();
-  };
-
-  return show ? (
-    <div className="l-modal">
-      <Shade show onClick={handleClickShade} />
-      <div className="fixed-center flex-center w-100 modal-container">
-        <div
-          className={classname([
-            'bg-FFFFFF modal-box',
-            { 'rounded-4': rounded },
-          ])}
-        >
-          {children ? (
-            children
-          ) : (
-            <>
-              <div className=" px-20 py-12 text-center">
-                <h3>{title}</h3>
-                <p>{content}</p>
-              </div>
-              <div className="border-top text-center event-buttons">
-                {showCancel && (
-                  <span
-                    className="d-inline-block w-50 h-100 lh-45 border-right cancel-button"
-                    onClick={handleClickCancel}
-                  >
-                    {cancel}
-                  </span>
-                )}
-                {showConfirm && (
-                  <span
-                    className="d-inline-block w-50 h-100 lh-45 confirm-button"
-                    onClick={handleClickConfirm}
-                  >
-                    {confirm}
-                  </span>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  ) : (
-    <></>
+  return (
+    <AModal
+      className={classnames(['l-modal', className])}
+      footer={
+        footer !== undefined
+          ? footer
+          : [
+              <Button key="cancel" mode="default" onClick={onCancel}>
+                {cancelText}
+              </Button>,
+              <Button
+                key="ok"
+                mode="theme"
+                className="ml-16"
+                loading={confirmLoading}
+                onClick={onOk}
+              >
+                {okText}
+              </Button>,
+            ]
+      }
+      onCancel={onCancel}
+      {...modalProps}
+    >
+      {props.children}
+    </AModal>
   );
 };
 

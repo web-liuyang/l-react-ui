@@ -1,0 +1,44 @@
+@import '../../style/index.less';
+
+.l-pagination {
+  .pagination-box {
+    /** 每一个数字 */
+    .ant-pagination-item {
+      &:hover {
+        border-color: @theme-color-button;
+        a {
+          color: @theme-color-button;
+        }
+      }
+
+      a {
+        line-height: 32px;
+      }
+    }
+
+    /** 选中颜色 */
+    .ant-pagination-item-active {
+      .theme-color-button;
+      .border-0;
+      a {
+        .color-FFFFFF;
+        &:hover {
+          .color-FFFFFF;
+        }
+      }
+    }
+
+    /** 上/下一页按钮 */
+    :is(.ant-pagination-next:hover, .ant-pagination-prev:hover) .ant-pagination-item-link {
+      border-color: @theme-color-button;
+      color: @theme-color-button;
+    }
+
+    /** 快进 */
+    :is(.ant-pagination-jump-next, .ant-pagination-jump-prev)
+      .ant-pagination-item-container
+      .ant-pagination-item-link-icon {
+      color: @theme-color-button;
+    }
+  }
+}

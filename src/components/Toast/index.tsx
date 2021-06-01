@@ -1,88 +1,65 @@
 import React, { FC } from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import classname from 'classnames';
-import '../../style/index.less';
+import classnames from 'classnames';
+import { Modal, ModalFuncProps } from 'antd';
+
 import './index.less';
 
 enum DEFAULT {
-  DURATION = 2000,
-  WARN = 'warn',
-  ERROR = 'error',
-  SUCCESS = 'success',
-  LOADING = 'loading',
+  CANCEL_TEXT = '取消',
+  OK_TEXT = '确认',
 }
 
-interface IProps {
-  content?: string;
-  icon?: string;
-  duration?: number;
-  mask?: boolean;
-  customize?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-  onClose?: () => void;
-}
-
-const DefaultToast: FC<IProps> = (props) => {
-  const { icon, content } = props;
-
-  return (
-    <>
-      <div className={classname({ loading: icon === DEFAULT.LOADING })}>
-        <i className={classname(['f24 iconfont', `icon-${icon}`])}></i>
-      </div>
-      <div>{content}</div>
-    </>
-  );
+const info = (props: ModalFuncProps) => {
+  return Modal.info({
+    cancelText: DEFAULT.CANCEL_TEXT,
+    okText: DEFAULT.OK_TEXT,
+    ...props,
+    className: classnames(['l-toast', props.className]),
+  });
 };
 
-const Toast: FC<IProps> = (props) => {
-  const { customize, mask } = props;
-
-  return (
-    <div className={classname(['l-toast', { mask }])}>
-      <div className="fixed-center px-12 py-6 rounded-10 text-center color-FFFFFF toast-shade">{customize || <DefaultToast {...props} />}</div>
-    </div>
-  );
+const success = (props: ModalFuncProps) => {
+  return Modal.success({
+    cancelText: DEFAULT.CANCEL_TEXT,
+    okText: DEFAULT.OK_TEXT,
+    ...props,
+    className: classnames(['l-toast', props.className]),
+  });
 };
 
-const showToast = (props: IProps): { close: () => void } => {
-  const { duration, onClose } = props;
-  const oDiv = document.createElement('div');
-  document.body.appendChild(oDiv);
-  render(<Toast {...props} />, oDiv);
-
-  const timer = setTimeout(() => {
-    close();
-    onClose && onClose();
-  }, duration);
-
-  const close = () => {
-    clearTimeout(timer);
-    unmountComponentAtNode(oDiv);
-    oDiv.remove();
-  };
-
-  return {
-    close,
-  };
+const error = (props: ModalFuncProps) => {
+  return Modal.error({
+    cancelText: DEFAULT.CANCEL_TEXT,
+    okText: DEFAULT.OK_TEXT,
+    ...props,
+    className: classnames(['l-toast', props.className]),
+  });
 };
 
-export default {
-  info({ content, icon, duration = DEFAULT.DURATION, mask, onClose }: IProps) {
-    return showToast({ content, icon, duration, mask, onClose });
-  },
-  warn({ content, icon = DEFAULT.WARN, duration = DEFAULT.DURATION, mask, onClose }: IProps) {
-    return showToast({ content, icon, duration, mask, onClose });
-  },
-  error({ content, icon = DEFAULT.ERROR, duration = DEFAULT.DURATION, mask, onClose }: IProps) {
-    return showToast({ content, icon, duration, mask, onClose });
-  },
-  success({ content, icon = DEFAULT.ERROR, duration = DEFAULT.DURATION, mask, onClose }: IProps) {
-    return showToast({ content, icon, duration, mask, onClose });
-  },
-  loading({ content, icon = DEFAULT.LOADING, duration = 99999 || DEFAULT.DURATION, mask, onClose }: IProps) {
-    return showToast({ content, icon, duration, mask, onClose });
-  },
-  customize({ customize, duration = DEFAULT.DURATION, mask, onClose }: IProps) {
-    return showToast({ customize, duration, mask, onClose });
-  },
+const warning = (props: ModalFuncProps) => {
+  return Modal.warning({
+    cancelText: DEFAULT.CANCEL_TEXT,
+    okText: DEFAULT.OK_TEXT,
+    ...props,
+    className: classnames(['l-toast', props.className]),
+  });
 };
+
+const confirm = (props: ModalFuncProps) => {
+  return Modal.confirm({
+    cancelText: DEFAULT.CANCEL_TEXT,
+    okText: DEFAULT.OK_TEXT,
+    ...props,
+    className: classnames(['l-toast', props.className]),
+  });
+};
+
+const Toast = {
+  info,
+  success,
+  error,
+  warning,
+  confirm,
+};
+
+export default Toast;
