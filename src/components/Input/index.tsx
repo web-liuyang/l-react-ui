@@ -30,8 +30,9 @@ const Input: FC<IProps> & Static = props => {
     value,
     valid,
     isValid,
-    errorMessage,
     className,
+    errorMessage,
+    autoComplete = 'off',
     onValid,
     onChange,
     ...inputProps
@@ -70,7 +71,6 @@ const Input: FC<IProps> & Static = props => {
 
   /** 判断是否合法函数 */
   const isVaildFunc = (bool: boolean) => {
-    console.log(bool);
     if (bool) {
       // 合法操作
 
@@ -92,7 +92,13 @@ const Input: FC<IProps> & Static = props => {
 
   return (
     <div className={classnames(['position-relative l-input', className])}>
-      <AInput className="input" value={value} onChange={handleChangeInput} {...inputProps} />
+      <AInput
+        className="input"
+        value={value}
+        autoComplete={autoComplete}
+        onChange={handleChangeInput}
+        {...inputProps}
+      />
       <p
         className={classnames([
           'position-absolute l-10 color-error f12',
