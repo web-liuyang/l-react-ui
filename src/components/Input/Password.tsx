@@ -3,11 +3,10 @@ import classnames from 'classnames';
 import { GroupProps } from 'antd/lib/input/Group';
 import { PasswordProps } from 'antd/lib/input/Password';
 import { Input as AInput } from 'antd';
-import Password from './Password';
 
 import './index.less';
 
-type IInputProps = ConstructorParameters<typeof AInput>[0];
+type IInputProps = PasswordProps & React.RefAttributes<any>;
 
 interface IProps extends IInputProps {
   /** 错误消息 */
@@ -20,14 +19,7 @@ interface IProps extends IInputProps {
   onValid?: (isValid: boolean) => void;
 }
 
-// static Group: typeof Group;
-
-interface Static {
-  Group: React.FC<GroupProps>;
-  Password: typeof Password;
-}
-
-const Input: FC<IProps> & Static = props => {
+const Input: FC<IProps> = props => {
   const {
     value,
     valid,
@@ -94,7 +86,7 @@ const Input: FC<IProps> & Static = props => {
 
   return (
     <div className={classnames(['position-relative l-input', className])}>
-      <AInput
+      <AInput.Password
         className="input"
         value={value}
         autoComplete={autoComplete}
@@ -114,8 +106,4 @@ const Input: FC<IProps> & Static = props => {
   );
 };
 
-Input.Group = AInput.Group;
-Input.Password = Password;
-
-// export default React.memo(Input);
 export default Input;

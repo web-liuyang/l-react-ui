@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+// import React from 'react';
 import classnames from 'classnames';
 import { Modal, ModalFuncProps } from 'antd';
+import { ModalFunc } from 'antd/lib/modal/confirm';
 
 import './index.less';
 
@@ -9,7 +10,9 @@ enum DEFAULT {
   OK_TEXT = '确认',
 }
 
-const info = (props: ModalFuncProps) => {
+type Return = ReturnType<ModalFunc>;
+
+const info = (props: ModalFuncProps): Return => {
   return Modal.info({
     cancelText: DEFAULT.CANCEL_TEXT,
     okText: DEFAULT.OK_TEXT,
@@ -18,7 +21,7 @@ const info = (props: ModalFuncProps) => {
   });
 };
 
-const success = (props: ModalFuncProps) => {
+const success = (props: ModalFuncProps): Return => {
   return Modal.success({
     cancelText: DEFAULT.CANCEL_TEXT,
     okText: DEFAULT.OK_TEXT,
@@ -27,7 +30,7 @@ const success = (props: ModalFuncProps) => {
   });
 };
 
-const error = (props: ModalFuncProps) => {
+const error = (props: ModalFuncProps): Return => {
   return Modal.error({
     cancelText: DEFAULT.CANCEL_TEXT,
     okText: DEFAULT.OK_TEXT,
@@ -36,7 +39,7 @@ const error = (props: ModalFuncProps) => {
   });
 };
 
-const warning = (props: ModalFuncProps) => {
+const warning = (props: ModalFuncProps): Return => {
   return Modal.warning({
     cancelText: DEFAULT.CANCEL_TEXT,
     okText: DEFAULT.OK_TEXT,
@@ -45,7 +48,7 @@ const warning = (props: ModalFuncProps) => {
   });
 };
 
-const confirm = (props: ModalFuncProps) => {
+const confirm = (props: ModalFuncProps): Return => {
   return Modal.confirm({
     cancelText: DEFAULT.CANCEL_TEXT,
     okText: DEFAULT.OK_TEXT,

@@ -1,10 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
-import { Modal as AModal } from 'antd';
-import { GetFuncPropsType } from '../../constants/interface';
 import Button from '../Button';
+import { GetFuncPropsType } from '../../constants/interface';
+import { Modal as AModal } from 'antd';
 
-// import '../Button/index.less';
 import './index.less';
 
 type IModalProps = GetFuncPropsType<typeof AModal>;

@@ -5,11 +5,13 @@ import { default as Icon } from './components/Icon';
 import { default as Modal } from './components/Modal';
 import { default as Shade } from './components/Shade';
 import { default as Toast } from './components/Toast';
+import { default as TablePro } from './components/TablePro';
 import { default as Radio } from './components/Radio';
 import { default as Pagination } from './components/Pagination';
 import { default as Select } from './components/Select';
 import { default as Checkbox } from './components/Checkbox';
 import { default as Switch } from './components/Switch';
+import { default as Tooltip } from './components/Tooltip';
 
 export {
   Alert,
@@ -24,4 +26,6 @@ export {
   Select,
   Checkbox,
   Switch,
+  TablePro,
+  Tooltip,
 };

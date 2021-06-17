@@ -1,13 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Button as AButton, ButtonProps } from 'antd';
 import classnames from 'classnames';
+import { Button as AButton, ButtonProps } from 'antd';
 import { local } from 'l-browser-storage';
 
 import './index.less';
 
 type IButtonProps = ButtonProps & React.RefAttributes<HTMLElement>;
 
-type IButtonClickType = React.MouseEvent<HTMLElement, MouseEvent> & { handleCountDown: () => void };
+export type IButtonClickType = React.MouseEvent<HTMLElement, MouseEvent> & {
+  handleCountDown: () => void;
+};
 
 enum DEFAULT {
   MODE = 'theme',
