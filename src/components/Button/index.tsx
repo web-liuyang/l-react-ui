@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
-import classnames from 'classnames';
-import { Button as AButton, ButtonProps } from 'antd';
-import { local } from 'l-browser-storage';
+import React, { FC, useEffect, useState } from "react";
+import classnames from "classnames";
+import { Button as AButton, ButtonProps } from "antd";
+import { local } from "l-browser-storage";
 
-import './index.less';
+import "./index.less";
 
 type IButtonProps = ButtonProps & React.RefAttributes<HTMLElement>;
 
@@ -12,13 +12,13 @@ export type IButtonClickType = React.MouseEvent<HTMLElement, MouseEvent> & {
 };
 
 enum DEFAULT {
-  MODE = 'theme',
-  SIZE = 'middle',
+  MODE = "theme",
+  SIZE = "middle",
 }
 
 interface IProps extends IButtonProps {
-  mode?: 'default' | 'theme' | 'disabled';
-  size?: 'large' | 'middle' | 'small';
+  mode?: "default" | "theme" | "disabled";
+  size?: "large" | "middle" | "small";
   initTime?: number;
   currentTime?: number;
   onEnd?: () => void;
@@ -27,7 +27,7 @@ interface IProps extends IButtonProps {
 }
 
 /** 本地倒计时 */
-const initCountDown = local.get('countDown').data;
+const initCountDown = local.get("countDown").data;
 
 const Button: FC<IProps> = props => {
   const {
@@ -68,20 +68,20 @@ const Button: FC<IProps> = props => {
     /** 触发计数监听 */
     onChangeTime && onChangeTime(time);
     /** 存储计数 */
-    local.set('countDown', time);
+    local.set("countDown", time);
     const timer = setInterval(() => {
       /** 当前倒计时时间-1 */
       --time;
       /** 触发计数监听 */
       onChangeTime && onChangeTime(time);
       /** 存储计数 */
-      local.set('countDown', time);
+      local.set("countDown", time);
       /** 判断是否倒计时小于0 */
       if (time <= 0) {
         /** 清除倒计时 */
         clearInterval(timer);
         /** 清除存储计数 */
-        local.remove('countDown');
+        local.remove("countDown");
         /** 恢复默认值 */
         setCountDown(initTime);
         /** 触发结束 */

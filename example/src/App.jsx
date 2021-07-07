@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button } from '../../dist';
+import A from "./l-react-ui/index.js";
 
 const App = () => {
+  console.log(A)
   return <div className="App">App</div>;
 };
 

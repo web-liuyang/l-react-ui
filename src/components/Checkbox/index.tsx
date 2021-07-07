@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { GetFuncPropsType } from '../../constants/interface';
-import { Checkbox as ACheckbox } from 'antd';
+import React, { FC } from "react";
+import { GetFuncPropsType } from "../../constants/interface";
+import { Checkbox as ACheckbox } from "antd";
 
-import './index.less';
+import "./index.less";
 
 type CheckboxPorps = GetFuncPropsType<typeof ACheckbox>;
 

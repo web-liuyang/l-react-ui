@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react';
-import classnames from 'classnames';
-import { GroupProps } from 'antd/lib/input/Group';
-import { PasswordProps } from 'antd/lib/input/Password';
-import { Input as AInput } from 'antd';
+import React, { FC, useState } from "react";
+import classnames from "classnames";
+import { GroupProps } from "antd/lib/input/Group";
+import { PasswordProps } from "antd/lib/input/Password";
+import { Input as AInput } from "antd";
 
-import './index.less';
+import "./index.less";
 
 type IInputProps = PasswordProps & React.RefAttributes<any>;
 
@@ -26,7 +26,7 @@ const Input: FC<IProps> = props => {
     isValid,
     className,
     errorMessage,
-    autoComplete = 'off',
+    autoComplete = "off",
     onValid,
     onChange,
     ...inputProps
@@ -53,7 +53,7 @@ const Input: FC<IProps> = props => {
             break;
           }
         }
-      } else if (typeof valid === 'string') {
+      } else if (typeof valid === "string") {
         bool = valid === value;
       } else {
         bool = valid.test(value);
@@ -85,7 +85,7 @@ const Input: FC<IProps> = props => {
   };
 
   return (
-    <div className={classnames(['position-relative l-input', className])}>
+    <div className={classnames(["position-relative l-input", className])}>
       <AInput.Password
         className="input"
         value={value}
@@ -95,9 +95,9 @@ const Input: FC<IProps> = props => {
       />
       <p
         className={classnames([
-          'position-absolute l-10 color-error f12',
-          { 'd-none': isValid === undefined ? isValidAuto : isValid },
-          'error',
+          "position-absolute l-10 color-error f12",
+          { "d-none": isValid === undefined ? isValidAuto : isValid },
+          "error",
         ])}
       >
         {errorMessage}

@@ -1,11 +1,10 @@
-import React, { FC, useState } from 'react';
-import classnames from 'classnames';
-import { GroupProps } from 'antd/lib/input/Group';
-import { PasswordProps } from 'antd/lib/input/Password';
-import { Input as AInput } from 'antd';
-import Password from './Password';
+import React, { FC, useState } from "react";
+import classnames from "classnames";
+import Password from "./Password";
+import type { GroupProps } from "antd/lib/input/Group";
+import { Input as AInput } from "antd";
 
-import './index.less';
+import "./index.less";
 
 type IInputProps = ConstructorParameters<typeof AInput>[0];
 
@@ -34,7 +33,7 @@ const Input: FC<IProps> & Static = props => {
     isValid,
     className,
     errorMessage,
-    autoComplete = 'off',
+    autoComplete = "off",
     onValid,
     onChange,
     ...inputProps
@@ -61,7 +60,7 @@ const Input: FC<IProps> & Static = props => {
             break;
           }
         }
-      } else if (typeof valid === 'string') {
+      } else if (typeof valid === "string") {
         bool = valid === value;
       } else {
         bool = valid.test(value);
@@ -93,7 +92,7 @@ const Input: FC<IProps> & Static = props => {
   };
 
   return (
-    <div className={classnames(['position-relative l-input', className])}>
+    <div className={classnames(["position-relative l-input", className])}>
       <AInput
         className="input"
         value={value}
@@ -103,9 +102,9 @@ const Input: FC<IProps> & Static = props => {
       />
       <p
         className={classnames([
-          'position-absolute l-10 color-error f12',
-          { 'd-none': isValid === undefined ? isValidAuto : isValid },
-          'error',
+          "position-absolute l-10 color-error f12",
+          { "d-none": isValid === undefined ? isValidAuto : isValid },
+          "error",
         ])}
       >
         {errorMessage}

@@ -1,13 +1,12 @@
-import React, { FC, useRef } from 'react';
-import Data from './Data';
-import Find from './Find';
-import Pagination from './Pagination';
-import { useUpdate } from '@/hooks';
-import { useSize } from 'ahooks';
-
-import './index.less';
+import React, { FC, useEffect, useRef } from "react";
+import Data from "./Data";
+import Find from "./Find";
+import Pagination from "./Pagination";
+import { useSize } from "ahooks";
 
 interface IProps {
+  /** 自定义高度 */
+  height?: number;
   /** 外层Dom */
   rootDom?: HTMLElement | null;
   /** 监听Dom 元素高度 */
@@ -34,7 +33,7 @@ export type StaticCompProps = {
 };
 
 const TablePro: FC<IProps> & Static = props => {
-  const { rootDom = null, onResize } = props;
+  const { rootDom = null, height, onResize } = props;
 
   /** 外层 - dom */
   const rootDomRef = useRef<HTMLElement | null>(rootDom);
@@ -45,21 +44,21 @@ const TablePro: FC<IProps> & Static = props => {
   /** Table - Ref */
   const TableProRef = useRef<HTMLDivElement | null>(null);
 
-  useUpdate(() => {
+  useEffect(() => {
     const findDom: HTMLDivElement | null | undefined =
-      TableProRef.current?.querySelector('.table-pro-find');
+      TableProRef.current?.querySelector(".table-pro-find");
     const DataDom: HTMLDivElement | null | undefined =
-      TableProRef.current?.querySelector('.table-pro-data');
+      TableProRef.current?.querySelector(".table-pro-data");
     const paginationDom: HTMLDivElement | null | undefined =
-      TableProRef.current?.querySelector('.table-pro-pagination');
+      TableProRef.current?.querySelector(".table-pro-pagination");
 
-    const rootHeight = rootDomZise.height || 0,
+    const rootHeight = height || rootDomZise.height || 0,
       tableProHeight = TableProRef.current?.clientHeight || 0,
       findHeight = findDom?.clientHeight || 0,
       paginationHeight = paginationDom?.clientHeight || 0,
       dataHeight = rootHeight - findHeight - paginationHeight;
 
-    DataDom?.style && (DataDom.style.height = dataHeight + 'px');
+    DataDom?.style && (DataDom.style.height = dataHeight + "px");
 
     /** 触发监听回调 */
     onResize &&
@@ -70,7 +69,7 @@ const TablePro: FC<IProps> & Static = props => {
         paginationHeight,
         dataHeight,
       });
-  }, [rootDomZise]);
+  }, [rootDomZise, height]);
 
   return (
     <div ref={TableProRef} className="l-table-pro">

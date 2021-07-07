@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import classnames from 'classnames';
+import React, { FC } from "react";
+import classnames from "classnames";
 
-import './index.less';
+import "./index.less";
 
 interface IProps {
   show?: boolean;
@@ -18,8 +18,8 @@ const Shade: FC<IProps> = props => {
   return (
     <div
       className={classnames([
-        show ? 'd-block' : 'd-none',
-        'position-fixed t-0 l-0 w-100 h-100 l-shade',
+        show ? "d-block" : "d-none",
+        "position-fixed t-0 l-0 w-100 h-100 l-shade",
       ])}
       onClick={handleClickShade}
     ></div>

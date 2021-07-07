@@ -1,18 +1,18 @@
-import React, { FC } from 'react';
-import classnames from 'classnames';
-import Button from '../Button';
-import { GetFuncPropsType } from '../../constants/interface';
-import { Modal as AModal } from 'antd';
+import React, { FC } from "react";
+import classnames from "classnames";
+import Button from "../Button";
+import { GetFuncPropsType } from "../../constants/interface";
+import { Modal as AModal } from "antd";
 
-import './index.less';
+import "./index.less";
 
 type IModalProps = GetFuncPropsType<typeof AModal>;
 
 enum DEFAULT {
   /** 取消 */
-  CANCELTEXT = '取消',
+  CANCELTEXT = "取消",
   /** 确定 */
-  OKTEXT = '确定',
+  OKTEXT = "确定",
 }
 
 const Modal: FC<IModalProps> = props => {
@@ -29,7 +29,7 @@ const Modal: FC<IModalProps> = props => {
 
   return (
     <AModal
-      className={classnames(['l-modal', className])}
+      className={classnames(["l-modal", className])}
       footer={
         footer !== undefined
           ? footer

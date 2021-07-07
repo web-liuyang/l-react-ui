@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import classnames from 'classnames';
-import { Select as ASelect } from 'antd';
+import React, { FC } from "react";
+import classnames from "classnames";
+import { Select as ASelect } from "antd";
 
-import { GetFuncPropsType } from '../../constants/interface';
+import { GetFuncPropsType } from "../../constants/interface";
 
-import './index.less';
+import "./index.less";
 
 type IProps = GetFuncPropsType<typeof ASelect>;
 
@@ -17,7 +17,7 @@ const Select: FC<IProps> & Static = props => {
   return (
     <div className="l-select">
       <ASelect
-        dropdownClassName={classnames(['dropdown-container', dropdownClassName])}
+        dropdownClassName={classnames(["dropdown-container", dropdownClassName])}
         {...selectProps}
       />
     </div>

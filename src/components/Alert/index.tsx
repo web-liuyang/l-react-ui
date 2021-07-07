@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { Alert as AAlert } from 'antd';
+import React, { FC } from "react";
+import { Alert as AAlert } from "antd";
 
-import './index.less';
+import "./index.less";
 
 type IAlertProps = Parameters<typeof AAlert>[0];
 

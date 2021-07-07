@@ -1,8 +1,6 @@
-import React, { FC } from 'react';
-import { Switch as ASwitch } from 'antd';
-import { GetFuncPropsType } from '../../constants/interface';
-
-import './index.less';
+import React, { FC } from "react";
+import { Switch as ASwitch } from "antd";
+import { GetFuncPropsType } from "../../constants/interface";
 
 type IProps = GetFuncPropsType<typeof ASwitch>;
 

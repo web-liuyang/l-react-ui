@@ -10,13 +10,13 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const { cwd } = require('process');
 
-const reslove = (pathname) => path.resolve(__dirname, '..', pathname);
+const reslove = pathname => path.resolve(__dirname, '..', pathname);
 
 fs.copy(reslove('src/style'), reslove('dist/style'))
-  .then((res) => {
+  .then(res => {
     console.log('copy-success');
   })
-  .catch((err) => {
+  .catch(err => {
     console.log('copy-err', err);
   });
 
@@ -72,7 +72,9 @@ module.exports = {
   externals: {
     antd: 'antd',
     react: 'react',
-    'react-dom': 'react-dom',
+    ahooks: 'ahooks',
+    classnames: 'classnames',
+    'l-browser-storage': 'l-browser-storage',
   },
   optimization: {
     splitChunks: {
