@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
 import classnames from "classnames";
-import { PasswordProps } from "antd/lib/input/Password";
+import { SearchProps } from "antd/lib/input/Search";
 import { Input as AInput } from "antd";
 
 import "./index.less";
 
-type IInputProps = PasswordProps & React.RefAttributes<any>;
+type IInputProps = SearchProps & React.RefAttributes<any>;
 
 interface IProps extends IInputProps {
   /** 错误消息 */
@@ -85,7 +85,7 @@ const Input: FC<IProps> = props => {
 
   return (
     <div className={classnames(["position-relative l-input", className])}>
-      <AInput.Password
+      <AInput.Search
         className="input"
         value={value}
         autoComplete={autoComplete}

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import Password from "./Password";
+import Search from "./Search";
 import type { GroupProps } from "antd/lib/input/Group";
 import { Input as AInput } from "antd";
 import "./index.less";
@@ -17,6 +18,7 @@ interface IProps extends IInputProps {
 interface Static {
     Group: React.FC<GroupProps>;
     Password: typeof Password;
+    Search: typeof Search;
 }
 declare const Input: FC<IProps> & Static;
 export default Input;
