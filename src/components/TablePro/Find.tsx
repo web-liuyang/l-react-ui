@@ -3,10 +3,10 @@ import classnames from "classnames";
 import { StaticCompProps } from ".";
 
 const Find: FC<StaticCompProps> = props => {
-  const { className } = props;
+  const { className, ...findProps } = props;
 
   return (
-    <div className={classnames(["table-pro-find", className])}>
+    <div className={classnames(["table-pro-find", className])} {...findProps}>
       <div>{props.children}</div>
     </div>
   );

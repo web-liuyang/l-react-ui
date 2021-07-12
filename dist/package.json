@@ -1,0 +1,9 @@
+{
+  "name": "l-react-ui",
+  "version": "1.0.0",
+  "description": "react components library",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./types/index.d.ts",
+  "private": true
+}

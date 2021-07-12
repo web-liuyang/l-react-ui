@@ -3,10 +3,10 @@ import classnames from "classnames";
 import { StaticCompProps } from ".";
 
 const Data: FC<StaticCompProps> = props => {
-  const { className } = props;
+  const { className, ...dataProps } = props;
 
   return (
-    <div className={classnames(["table-pro-data", className])}>
+    <div className={classnames(["table-pro-data", className])} {...dataProps}>
       <div>{props.children}</div>
     </div>
   );

@@ -30,6 +30,7 @@ type Static = {
 /** 静态 - 组件参数 */
 export type StaticCompProps = {
   className?: string;
+  style?: React.CSSProperties;
 };
 
 const TablePro: FC<IProps> & Static = props => {
@@ -57,8 +58,6 @@ const TablePro: FC<IProps> & Static = props => {
       findHeight = findDom?.clientHeight || 0,
       paginationHeight = paginationDom?.clientHeight || 0,
       dataHeight = rootHeight - findHeight - paginationHeight;
-
-    DataDom?.style && (DataDom.style.height = dataHeight + "px");
 
     /** 触发监听回调 */
     onResize &&

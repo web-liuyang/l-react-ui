@@ -3,10 +3,10 @@ import classnames from "classnames";
 import { StaticCompProps } from ".";
 
 const Pagination: FC<StaticCompProps> = props => {
-  const { className } = props;
+  const { className, ...paginationProps } = props;
 
   return (
-    <div className={classnames(["table-pro-pagination", className])}>
+    <div className={classnames(["table-pro-pagination", className])} {...paginationProps}>
       <div>{props.children}</div>
     </div>
   );
