@@ -3,6 +3,10 @@ import { PasswordProps } from "antd/lib/input/Password";
 import "./index.less";
 declare type IInputProps = PasswordProps & React.RefAttributes<any>;
 interface IProps extends IInputProps {
+    /** 输入框 label */
+    label?: string;
+    /** 是否必填 */
+    require?: boolean;
     /** 错误消息 */
     errorMessage?: string;
     /** 正则表达式 */

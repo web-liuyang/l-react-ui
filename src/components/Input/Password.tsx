@@ -8,6 +8,10 @@ import "./index.less";
 type IInputProps = PasswordProps & React.RefAttributes<any>;
 
 interface IProps extends IInputProps {
+  /** 输入框 label */
+  label?: string;
+  /** 是否必填 */
+  require?: boolean;
   /** 错误消息 */
   errorMessage?: string;
   /** 正则表达式 */
@@ -18,14 +22,21 @@ interface IProps extends IInputProps {
   onValid?: (isValid: boolean) => void;
 }
 
+const DEFAULT = {
+  AUTO_COMPLETE: "off",
+  REQUIRE: true,
+};
+
 const Input: FC<IProps> = props => {
   const {
+    label,
     value,
     valid,
     isValid,
     className,
     errorMessage,
-    autoComplete = "off",
+    require = DEFAULT.REQUIRE,
+    autoComplete = DEFAULT.AUTO_COMPLETE,
     onValid,
     onChange,
     ...inputProps
@@ -85,6 +96,11 @@ const Input: FC<IProps> = props => {
 
   return (
     <div className={classnames(["position-relative l-input", className])}>
+      {label && (
+        <div className="mb-8">
+          {label} {!require && <span className="color-999999">（选填）</span>}
+        </div>
+      )}
       <AInput.Password
         className="input"
         value={value}

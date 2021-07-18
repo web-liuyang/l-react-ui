@@ -10,6 +10,10 @@ import "./index.less";
 type IInputProps = ConstructorParameters<typeof AInput>[0];
 
 interface IProps extends IInputProps {
+  /** 输入框 label */
+  label?: string;
+  /** 是否必填 */
+  require?: boolean;
   /** 错误消息 */
   errorMessage?: string;
   /** 正则表达式 */
@@ -28,14 +32,21 @@ interface Static {
   Search: typeof Search;
 }
 
+const DEFAULT = {
+  AUTO_COMPLETE: "off",
+  REQUIRE: true,
+};
+
 const Input: FC<IProps> & Static = props => {
   const {
+    label,
     value,
     valid,
     isValid,
     className,
     errorMessage,
-    autoComplete = "off",
+    require = DEFAULT.REQUIRE,
+    autoComplete = DEFAULT.AUTO_COMPLETE,
     onValid,
     onChange,
     ...inputProps
@@ -95,6 +106,11 @@ const Input: FC<IProps> & Static = props => {
 
   return (
     <div className={classnames(["position-relative l-input", className])}>
+      {label && (
+        <div className="mb-8">
+          {label} {!require && <span className="color-999999">（选填）</span>}
+        </div>
+      )}
       <AInput
         className="input"
         value={value}
