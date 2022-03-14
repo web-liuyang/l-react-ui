@@ -1,13 +1,19 @@
-import React, { FC, useMemo } from "react";
+import React, { CSSProperties, FC, ReactText, useMemo } from "react";
 import { Divider } from "antd";
 import classnames from "classnames";
 
 type DataChild = {
-  name: string | number;
-  value?: string | number;
+  name: ReactText;
+  value?: ReactText;
+  /** 是否显示 */
   visible?: Data["visible"];
+  /** class */
   className?: Data["className"];
-  hint?: string | number | boolean | JSX.Element | ((item: DataChild) => JSX.Element);
+  /** style */
+  style?: Data["style"];
+  /** 提示 */
+  hint?: ReactText | boolean | JSX.Element | ((item: DataChild) => JSX.Element);
+  /** 自定义render */
   render?: (item: DataChild) => JSX.Element;
 };
 
@@ -18,10 +24,12 @@ export type Data = {
   divider?: boolean;
   /** class */
   className?: string;
+  /** style */
+  style?: CSSProperties;
   /** key */
-  key?: string | number;
+  key?: ReactText;
   /** 标题 */
-  title: string | number;
+  title: ReactText;
   /** 子数据 */
   child?: DataChild[];
   /** 排列方式 */
@@ -30,11 +38,11 @@ export type Data = {
   render?: (item?: DataChild[]) => JSX.Element;
 };
 
-interface IProps {
+interface ITextProps {
   data: Data[];
 }
 
-type IPropsContent = {
+type IContentProps = {
   data: DataChild[];
 } & Required<Pick<Data, "direction">>;
 
@@ -43,7 +51,7 @@ const DEFAULT = {
   VISIBLE: true,
 };
 
-const Content: FC<IPropsContent> = props => {
+const Content: FC<IContentProps> = props => {
   const { data, direction } = props;
 
   const Comp = useMemo(() => {
@@ -51,12 +59,12 @@ const Content: FC<IPropsContent> = props => {
       case "horizontal":
         return (
           <div className="flex-b-between flex-wrap">
-            {data.map(({ visible, name, render, value, hint, className }, index, arr) => {
+            {data.map(({ visible, name, value, hint, style, className, render }, index, arr) => {
               visible === undefined && (visible = DEFAULT.VISIBLE);
               if (visible) {
                 return (
                   <div className="mb-16 w-50" key={name}>
-                    <div className={classnames(["flex-s-start", className])}>
+                    <div className={classnames(["flex-s-start", className])} style={style}>
                       <div className="color-999999">{name}</div>
                       <div>{render ? render(arr[index]) : value}</div>
                     </div>
@@ -93,7 +101,7 @@ const Content: FC<IPropsContent> = props => {
   return Comp;
 };
 
-const Text: FC<IProps> = props => {
+const Text: FC<ITextProps> = props => {
   const { data } = props;
 
   return (
@@ -103,17 +111,18 @@ const Text: FC<IProps> = props => {
           key,
           title,
           child,
-          render,
+          style,
           divider,
           direction,
           className,
+          render,
           visible = DEFAULT.VISIBLE,
         }) => {
           visible === undefined && (visible = DEFAULT.VISIBLE);
 
           if (visible) {
             return (
-              <div key={key || title} className={classnames([className])}>
+              <div key={key || title} className={classnames([className])} style={style}>
                 <div>
                   <div className="mb-16 f16 f-600">{title}</div>
                   {(render && render(child)) ||

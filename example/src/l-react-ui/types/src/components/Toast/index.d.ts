@@ -8,5 +8,6 @@ declare const Toast: {
     error: (props: ModalFuncProps) => Return;
     warning: (props: ModalFuncProps) => Return;
     confirm: (props: ModalFuncProps) => Return;
+    destroyAll: () => void;
 };
 export default Toast;

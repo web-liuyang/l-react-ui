@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { ButtonProps } from "antd";
 import "./index.less";
 declare type IButtonProps = ButtonProps & React.RefAttributes<HTMLElement>;
@@ -14,5 +14,5 @@ interface IProps extends IButtonProps {
     onClick?: (e: IButtonClickType) => void;
     onChangeTime?: (time: number) => void;
 }
-declare const _default: React.NamedExoticComponent<IProps>;
-export default _default;
+declare const Button: FC<IProps>;
+export default Button;

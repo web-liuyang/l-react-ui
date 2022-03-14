@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { CSSProperties, FC, ReactText } from "react";
 declare type DataChild = {
-    name: string | number;
-    value?: string | number;
+    name: ReactText;
+    value?: ReactText;
+    /** 是否显示 */
     visible?: Data["visible"];
+    /** class */
     className?: Data["className"];
-    hint?: string | number | boolean | JSX.Element | ((item: DataChild) => JSX.Element);
+    /** style */
+    style?: Data["style"];
+    /** 提示 */
+    hint?: ReactText | boolean | JSX.Element | ((item: DataChild) => JSX.Element);
+    /** 自定义render */
     render?: (item: DataChild) => JSX.Element;
 };
 export declare type Data = {
@@ -14,10 +20,12 @@ export declare type Data = {
     divider?: boolean;
     /** class */
     className?: string;
+    /** style */
+    style?: CSSProperties;
     /** key */
-    key?: string | number;
+    key?: ReactText;
     /** 标题 */
-    title: string | number;
+    title: ReactText;
     /** 子数据 */
     child?: DataChild[];
     /** 排列方式 */
@@ -25,8 +33,8 @@ export declare type Data = {
     /** 自定义render */
     render?: (item?: DataChild[]) => JSX.Element;
 };
-interface IProps {
+interface ITextProps {
     data: Data[];
 }
-declare const Text: FC<IProps>;
+declare const Text: FC<ITextProps>;
 export default Text;

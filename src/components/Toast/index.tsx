@@ -63,6 +63,7 @@ const Toast = {
   error,
   warning,
   confirm,
+  destroyAll: Modal.destroyAll,
 };
 
 export default Toast;

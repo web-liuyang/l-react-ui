@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.less';
+import React from "react";
+import "./index.less";
 interface IProps {
     show?: boolean;
     onClick?: () => void;

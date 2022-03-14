@@ -1,19 +1,40 @@
-import { FC } from 'react';
+import { CSSProperties, FC, ReactText } from "react";
 declare type DataChild = {
-    name: string | number;
-    value?: string | number;
+    name: ReactText;
+    value?: ReactText;
+    /** 是否显示 */
+    visible?: Data["visible"];
+    /** class */
+    className?: Data["className"];
+    /** style */
+    style?: Data["style"];
+    /** 提示 */
+    hint?: ReactText | boolean | JSX.Element | ((item: DataChild) => JSX.Element);
+    /** 自定义render */
     render?: (item: DataChild) => JSX.Element;
 };
 export declare type Data = {
-    key?: string | number;
-    title: string | number;
+    /** 是否显示 */
+    visible?: boolean;
+    /** 间隔 */
     divider?: boolean;
+    /** class */
+    className?: string;
+    /** style */
+    style?: CSSProperties;
+    /** key */
+    key?: ReactText;
+    /** 标题 */
+    title: ReactText;
+    /** 子数据 */
     child?: DataChild[];
-    direction?: 'horizontal' | 'vertical';
+    /** 排列方式 */
+    direction?: "horizontal" | "vertical";
+    /** 自定义render */
     render?: (item?: DataChild[]) => JSX.Element;
 };
-interface IProps {
+interface ITextProps {
     data: Data[];
 }
-declare const Text: FC<IProps>;
+declare const Text: FC<ITextProps>;
 export default Text;

@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import Text from './Text';
+import { FC } from "react";
+import Text from "./Text";
 declare type Static = {
     Text: typeof Text;
 };

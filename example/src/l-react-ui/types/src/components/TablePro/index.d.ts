@@ -1,8 +1,10 @@
 import React, { FC } from "react";
+import Pagination from "./Pagination";
 import Data from "./Data";
 import Find from "./Find";
-import Pagination from "./Pagination";
-interface IProps {
+interface ITableProProps {
+    /** 类名 */
+    className?: string;
     /** 自定义高度 */
     height?: number;
     /** 外层Dom */
@@ -17,7 +19,7 @@ export declare type Resize = {
     dataHeight: number;
     paginationHeight: number;
 };
-declare type Static = {
+declare type ITableProStatic = {
     Data: typeof Data;
     Find: typeof Find;
     Pagination: typeof Pagination;
@@ -27,5 +29,5 @@ export declare type StaticCompProps = {
     className?: string;
     style?: React.CSSProperties;
 };
-declare const TablePro: FC<IProps> & Static;
+declare const TablePro: FC<ITableProProps> & ITableProStatic;
 export default TablePro;

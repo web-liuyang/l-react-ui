@@ -1,10 +1,14 @@
 import React, { FC, useEffect, useRef } from "react";
+import Pagination from "./Pagination";
+import classnames from "classnames";
 import Data from "./Data";
 import Find from "./Find";
-import Pagination from "./Pagination";
+
 import { useSize } from "ahooks";
 
-interface IProps {
+interface ITableProProps {
+  /** 类名 */
+  className?: string;
   /** 自定义高度 */
   height?: number;
   /** 外层Dom */
@@ -21,7 +25,7 @@ export type Resize = {
   paginationHeight: number;
 };
 
-type Static = {
+type ITableProStatic = {
   Data: typeof Data;
   Find: typeof Find;
   Pagination: typeof Pagination;
@@ -33,8 +37,8 @@ export type StaticCompProps = {
   style?: React.CSSProperties;
 };
 
-const TablePro: FC<IProps> & Static = props => {
-  const { rootDom = null, height, onResize } = props;
+const TablePro: FC<ITableProProps> & ITableProStatic = props => {
+  const { rootDom = null, height, className, onResize } = props;
 
   /** 外层 - dom */
   const rootDomRef = useRef<HTMLElement | null>(rootDom);
@@ -48,8 +52,8 @@ const TablePro: FC<IProps> & Static = props => {
   useEffect(() => {
     const findDom: HTMLDivElement | null | undefined =
       TableProRef.current?.querySelector(".table-pro-find");
-    const DataDom: HTMLDivElement | null | undefined =
-      TableProRef.current?.querySelector(".table-pro-data");
+    // const DataDom: HTMLDivElement | null | undefined =
+    //   TableProRef.current?.querySelector(".table-pro-data");
     const paginationDom: HTMLDivElement | null | undefined =
       TableProRef.current?.querySelector(".table-pro-pagination");
 
@@ -71,7 +75,7 @@ const TablePro: FC<IProps> & Static = props => {
   }, [rootDomZise, height]);
 
   return (
-    <div ref={TableProRef} className="l-table-pro">
+    <div ref={TableProRef} className={classnames(["l-table-pro", className])}>
       {props.children}
     </div>
   );

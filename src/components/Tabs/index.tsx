@@ -2,17 +2,22 @@ import React, { FC } from "react";
 import classnames from "classnames";
 import { Tabs as ATabs } from "antd";
 import { GetFuncPropsType } from "../../constants/interface";
+import type { TabNavListProps } from "rc-tabs/lib/TabNavList";
 
 import "./index.less";
 
-type IProps = GetFuncPropsType<typeof ATabs>;
+type TabsProps = GetFuncPropsType<typeof ATabs>;
 
 type Static = {
   TabPane: typeof ATabs["TabPane"];
 };
 
 /** TabBar */
-const RenderTabBar = (props: any, DefaultTabBar: React.ComponentType<{}>, tabProps: IProps) => {
+const RenderTabBar = (
+  props: any,
+  DefaultTabBar: React.ComponentType<TabNavListProps>,
+  tabProps: TabsProps
+) => {
   return <DefaultTabBar className={tabProps.type} {...props} />;
 };
 
@@ -22,7 +27,7 @@ const DEFAULT = {
   TABBAR_GUTTER: 4,
 };
 
-const Tabs: FC<IProps> & Static = props => {
+const Tabs: FC<TabsProps> & Static = props => {
   const { className, renderTabBar = DEFAULT.RenderTabBar, ...tabsProps } = props;
   return (
     <ATabs

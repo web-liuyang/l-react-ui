@@ -5,10 +5,11 @@
 */
 
 /** 头部高度 */
-// @head-max-height: 72px;
+// @head-max-height: 48px;
 // @head-min-height: 48px;
 .head-height {
-  min-height: @head-max-height;
+  min-height: @head-min-height;
+  max-height: @head-max-height;
 }
 
 /** 内容宽度 */
@@ -19,10 +20,19 @@
 }
 
 /** 侧边宽度 */
-// @sidebar-max-width: 256px;
-// @sidebar-min-width: 240px;
+// @sidebar-max-width: 200px;
+// @sidebar-min-width: 200px;
 .sidebar-width {
   min-width: @sidebar-min-width;
+  max-width: @sidebar-max-width;
+}
+
+/** 面包屑最小高度 */
+// @breadcrumb-max-height: 40px;
+// @breadcrumb-min-height: 40px;
+.breadcrumb-height {
+  min-height: @breadcrumb-min-height;
+  max-height: @breadcrumb-max-height;
 }
 
 /*

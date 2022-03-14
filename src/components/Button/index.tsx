@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import classnames from "classnames";
-import { Button as AButton, ButtonProps } from "antd";
+import { useMount } from "ahooks";
 import { local } from "l-browser-storage";
+import { Button as AButton, ButtonProps } from "antd";
 
 import "./index.less";
 
@@ -46,7 +47,7 @@ const Button: FC<IProps> = props => {
   /** 当前计数 */
   const [countDown, setCountDown] = useState<number>(initCountDown || currentTime);
 
-  useEffect(() => {
+  useMount(() => {
     /** 是否存在倒计时 */
     if (initTime) {
       /** 默认倒计时时间 */
@@ -59,10 +60,10 @@ const Button: FC<IProps> = props => {
         handleCountDown();
       }
     }
-  }, []);
+  });
 
   /** 开始倒计时 */
-  const handleCountDown = (): void => {
+  const handleCountDown = () => {
     /** 获取当前倒计时时间 */
     let time = countDown - 1;
     /** 触发计数监听 */
@@ -111,4 +112,4 @@ const Button: FC<IProps> = props => {
   );
 };
 
-export default React.memo(Button);
+export default Button;
